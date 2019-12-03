@@ -7,8 +7,8 @@ contents of a web page and streamed to an RTMP end-point (Twitch, Youtube,...).
 
 ## Installation
 
-The application is packaged as a Flatpak app, currently hosted on my server. To
-install it run this on your Linux desktop terminal:
+The application is packaged as a Flatpak app, currently hosted on Igalia's
+software server. To install it run this on your Linux desktop terminal:
 
 ```shell
 $ flatpak install --user https://software.igalia.com/flatpak-refs/gst-wpe-broadcast-demo.flatpakref
