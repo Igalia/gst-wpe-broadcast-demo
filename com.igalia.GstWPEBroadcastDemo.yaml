@@ -1,6 +1,6 @@
 app-id: com.igalia.GstWPEBroadcastDemo
 runtime: org.wpe.Platform
-runtime-version: '0.1'
+runtime-version: stable
 sdk: org.wpe.Sdk
 sdk-extensions:
 - org.freedesktop.Sdk.Extension.rust-stable

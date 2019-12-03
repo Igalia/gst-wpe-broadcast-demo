@@ -11,7 +11,7 @@ The application is packaged as a Flatpak app, currently hosted on my server. To
 install it run this on your Linux desktop terminal:
 
 ```shell
-$ flatpak install --user https://software.igalia.com/flatpakrefs/gst-wpe-broadcast-demo.flatpakref
+$ flatpak install --user https://software.igalia.com/flatpak-refs/gst-wpe-broadcast-demo.flatpakref
 ```
 
 The recommended way to run it is also from the terminal because sometimes the UI
