@@ -1,0 +1,32 @@
+app-id: com.igalia.GstWPEBroadcastDemo
+runtime: org.wpe.Platform
+runtime-version: '0.1'
+sdk: org.wpe.Sdk
+sdk-extensions:
+- org.freedesktop.Sdk.Extension.rust-stable
+command: gst-wpe-broadcast-demo
+# Until we can use Pipewire, grant access to all devices
+finish-args:
+- --device=all
+- --device=dri
+- --share=network
+- --share=ipc
+- --socket=x11
+- --socket=wayland
+- --socket=pulseaudio
+- --socket=system-bus
+- --socket=session-bus
+- --system-talk-name=org.a11y.Bus
+- --filesystem=home
+- --env=GST_VAAPI_ALL_DRIVERS=1
+build-options:
+  append-path: /usr/lib/sdk/rust-stable/bin
+  env:
+    CARGO_HOME: /run/build/gst-wpe-broadcast-demo/cargo
+modules:
+- name: gst-wpe-broadcast-demo
+  buildsystem: meson
+  sources:
+  - type: archive
+    url: https://people.igalia.com/pnormand/gst-wpe-broadcast-demo-1.0.0.tar.xz
+    sha256: 83b6de27e32d6ec7dde0b1fb64985f74947e5b0d9031c0d76b13c8f245cb6989

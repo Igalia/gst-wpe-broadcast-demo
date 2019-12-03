@@ -1,0 +1,17 @@
+#!/usr/bin/env xdg-open
+
+[Desktop Entry]
+Version=1.0
+Name[en_GB]=GstWPEBroadcastDemo
+Name=GstWPEBroadcastDemo
+Comment[en_GB]=Live-streams your webcam with HTML overlays
+Comment=Live-streams your webcam with HTML overlays
+Keywords[en_GB]=Audio;Video;
+Keywords=Audio;Video;
+Exec=gst-wpe-broadcast-demo
+DBusActivatable=false
+Terminal=false
+Type=Application
+Categories=GTK;GNOME;AudioVideo;Audio;Video;
+StartupNotify=true
+Icon=com.igalia.GstWPEBroadcastDemo.svg

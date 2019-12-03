@@ -1,0 +1,18 @@
+[package]
+name = "gst-wpe-broadcast-demo"
+version = "1.0.0"
+authors = ["Philippe Normand <philn@igalia.com>"]
+license = "MIT"
+edition = "2018"
+
+[dependencies]
+glib = "0.8"
+gio = "0.7"
+gtk = "0.7"
+gst = { package = "gstreamer", version = "0.14", features = ["v1_10"] }
+serde = "1.0"
+serde_any = "0.5"
+strfmt = "0.1.6"
+base64 = "0.11"
+cairo-rs = "0.7"
+num = "0.2.0"

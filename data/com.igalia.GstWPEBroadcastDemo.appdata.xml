@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2019 Philippe Normand <philn_AT_igalia.com> -->
+<component type="desktop">
+  <id>com.igalia.GstWPEBroadcastDemo</id>
+  <launchable type="desktop">com.igalia.GstWPEBroadcastDemo</launchable>
+  <metadata_license>CC-BY-3.0</metadata_license>
+  <project_license>MIT</project_license>
+  <translation type="gettext">gst-wpe-broadcast-demo</translation>
+  <name>GstWPEBroadcastDemo</name>
+  <summary>Live-streams your webcam with HTML overlays</summary>
+  <description>
+      <p>
+          The GstWPEBroadcast demo application allows the live video input (webcam) to
+          be mixed with the contents of a web page and streamed to an RTMP
+          end-point (Twitch, Youtube,...) which
+          can be configured in the settings.
+      </p>
+  </description>
+  <update_contact>philn_AT_igalia.com</update_contact>
+  <developer_name>Philippe Normand</developer_name>
+  <url type="homepage">https://github.com/igalia/gst-wpe-broadcast-demo</url>
+  <screenshots>
+      <screenshot>
+          <image>https://github.com/igalia/gst-wpe-broadcast-demo/raw/master/data/screenshot.png</image>
+          <caption>Screenshot</caption>
+      </screenshot>
+  </screenshots>
+  <content_rating type="oars-1.1" />
+  <releases>
+    <release version="1.0.0" date="2019-12-03">
+      <description><p>Initial release of the GstWPE broadcast demo.</p></description>
+    </release>
+  </releases>
+</component>
