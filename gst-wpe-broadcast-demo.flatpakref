@@ -1,7 +1,0 @@
-[Flatpak Ref]
-Title=GstWPE Broadcast Demo
-Name=com.igalia.GstWPEBroadcastDemo
-Branch=master
-Url=https://software.igalia.com/wpe-releases
-IsRuntime=false
-RuntimeRepo=https://software.igalia.com/flatpak-refs/wpe-releases.flatpakrepo
