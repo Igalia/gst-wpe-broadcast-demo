@@ -134,7 +134,8 @@ impl Pipeline {
             pipeline.on_pipeline_message(msg);
 
             glib::Continue(true)
-        });
+        })
+        .expect("Unable to add bus watch");
 
         Ok(pipeline)
     }
@@ -198,6 +199,7 @@ impl Pipeline {
         widget_value
             .get::<gtk::Widget>()
             .expect("Sink's widget propery was of the wrong type")
+            .unwrap()
     }
 
     pub fn start(&self) -> Result<gst::StateChangeSuccess, gst::StateChangeError> {
@@ -258,7 +260,7 @@ impl Pipeline {
             .expect("Failed to get sink pad from recording bin");
 
         *self.recording_video_pad.borrow_mut() = Some(srcpad.clone());
-        if let Some(video_ghost_pad) = gst::GhostPad::new(Some("video_sink"), &sinkpad) {
+        if let Ok(video_ghost_pad) = gst::GhostPad::new(Some("video_sink"), &sinkpad) {
             bin.add_pad(&video_ghost_pad).unwrap();
             // If linking fails, we just undo what we did above
             if let Err(err) = srcpad.link(&video_ghost_pad) {
@@ -282,7 +284,7 @@ impl Pipeline {
             .expect("Failed to get sink pad from queue");
 
         *self.recording_audio_pad.borrow_mut() = Some(audio_srcpad.clone());
-        if let Some(audio_ghost_pad) = gst::GhostPad::new(Some("audio_sink"), &queue_sinkpad) {
+        if let Ok(audio_ghost_pad) = gst::GhostPad::new(Some("audio_sink"), &queue_sinkpad) {
             bin.add_pad(&audio_ghost_pad).unwrap();
             // If linking fails, we just undo what we did above
             if let Err(err) = audio_srcpad.link(&audio_ghost_pad) {
@@ -446,7 +448,10 @@ impl Pipeline {
                 // Here we can send ourselves messages from any thread and show them to the user in
                 // the UI in case something goes wrong
                 Some(s) if s.get_name() == "warning" => {
-                    let text = s.get::<&str>("text").expect("Warning message without text");
+                    let text = s
+                        .get::<&str>("text")
+                        .expect("Warning message without text")
+                        .unwrap();
                     utils::show_error_dialog(false, text);
                 }
                 _ => (),
@@ -454,22 +459,31 @@ impl Pipeline {
             MessageView::Element(msg) => {
                 if let Some(structure) = msg.get_structure() {
                     if structure.get_name() == "level" {
-                        let rms = structure.get::<glib::ValueArray>("rms").unwrap();
+                        let rms = structure
+                            .get::<glib::ValueArray>("rms")
+                            .expect("level message without RMS value")
+                            .unwrap();
                         let rms_values = rms
                             .iter()
-                            .map(|v| v.get::<f64>().unwrap())
+                            .map(|v| v.get_some::<f64>().unwrap())
                             .collect::<Vec<_>>();
 
-                        let peak = structure.get::<glib::ValueArray>("peak").unwrap();
+                        let peak = structure
+                            .get::<glib::ValueArray>("peak")
+                            .expect("level message without Peak value")
+                            .unwrap();
                         let peak_values = peak
                             .iter()
-                            .map(|v| v.get::<f64>().unwrap())
+                            .map(|v| v.get_some::<f64>().unwrap())
                             .collect::<Vec<_>>();
 
-                        let decay = structure.get::<glib::ValueArray>("decay").unwrap();
+                        let decay = structure
+                            .get::<glib::ValueArray>("decay")
+                            .expect("level message without Decay value")
+                            .unwrap();
                         let decay_values = decay
                             .iter()
-                            .map(|v| v.get::<f64>().unwrap())
+                            .map(|v| v.get_some::<f64>().unwrap())
                             .collect::<Vec<_>>();
 
                         let audio_vumeter = &self.audio_vumeter;
